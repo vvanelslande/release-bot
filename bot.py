@@ -198,13 +198,6 @@ def post():
                                     zip_file.close()
                                     asyncio.run(upload(sz_file_io, True))
                                     asyncio.run(upload(zip_file_io, False))
-
-                            return {
-                                'type': 4,
-                                'data': {
-                                    'content': f'<{release["html_url"].replace("/releases/", "/releases/edit/")}>'
-                                }
-                            }
             except:
                 bottle.response.status = 400
     else:
