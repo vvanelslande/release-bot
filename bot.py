@@ -62,7 +62,7 @@ def post():
                                 }
                             ).json()['artifacts']
 
-                            release = httpx.post(
+                            upload_url = httpx.post(
                                 f'https://api.github.com/repos/vvanelslande/{repository}/releases',
                                 headers={
                                     'Authorization': f'token {github_token}',
@@ -73,7 +73,7 @@ def post():
                                     'tag_name': version,
                                     'draft': True
                                 }
-                            ).json()
+                            ).json()['upload_url']
 
                             for artifact in artifacts:
                                 artifact_response = httpx.get(
@@ -102,7 +102,7 @@ def post():
 
                                     async with httpx.AsyncClient() as client:
                                         r1 = await client.post(
-                                            f'{release["upload_url"].replace("{?name,label}", "")}',
+                                            f'{upload_url.replace("{?name,label}", "")}',
                                             headers={
                                                 'Authorization': f'token {github_token}',
                                                 'User-Agent': 'vvanelslande/release-bot',
