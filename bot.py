@@ -209,7 +209,7 @@ folder = os.path.dirname(os.path.realpath(__file__))
 bottle.run(
     server='gunicorn',
     host='0.0.0.0',
-    port=20726,
+    port=8268,
     certfile=os.path.join(folder, 'gunicorn-certificate.pem'),
     keyfile=os.path.join(folder, 'gunicorn-private-key.pem'),
     timeout=300
