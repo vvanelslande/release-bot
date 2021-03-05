@@ -2,7 +2,6 @@
 # Licensed under GPLv3 or any later version
 # Refer to the license.txt file included.
 
-import asyncio
 import io
 import json
 import os
@@ -164,8 +163,9 @@ async def create_draft_release(ctx, repository: str, version: str):
 
             sz_file.close()
             zip_file_2.close()
-            asyncio.run(upload(sz_file_io, True))
-            asyncio.run(upload(zip_file_2_io, False))
+
+            await upload(sz_file_io, True)
+            await upload(zip_file_2_io, False)
         else:
             for info in zip_file_infolist:
                 sz_file.writef(
@@ -175,7 +175,8 @@ async def create_draft_release(ctx, repository: str, version: str):
 
             sz_file.close()
             zip_file.close()
-            asyncio.run(upload(sz_file_io, True))
-            asyncio.run(upload(zip_file_io, False))
+
+            await upload(sz_file_io, True)
+            await upload(zip_file_io, False)
 
 bot.run(os.environ['DISCORD_TOKEN'])
